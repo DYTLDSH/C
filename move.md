@@ -6,5 +6,9 @@ For an lvalue is something that has a specific memory location, we can get the a
 - ## **rvalue**
 For an rvalue, it different from lvalue. rvalue is a temporary object which do not have a name. The return value of a function and the value of an expression are rvalues. We can understand lvalue and rvalue as lvalue is a container but rvalue is the value in the container. We can get the specific address of lvalue, but we can not get the address of a rvalue. rvalue always has a short lifetime.
 - ## **lvalue reference**
+In short, lvalue reference is a reference that binds to an lvalue which marked with one '&' symbol.
+It has to be initialized to a valid object or function when creating it. But keep in mind the object or function must be an lvalue.
 - ## **rvalue reference**
+rvalue reference is a reference that binds t an rvalue. It marked with symbol '&&'.
+It has to be initialized when creating it.
 - ## **move**
