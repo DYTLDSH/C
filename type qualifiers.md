@@ -62,8 +62,8 @@ For struct or class, although, we define the instance is a constant, the variabl
 
 Can any constant's value can be changed through pointer? The answer is also "NO". Only **local constant** variable can be changed in this way. For **static local constant, global constant, static global constant**, these variables are stored on the read only data segment, they are "real constant", the value can not be changed during its lifetime.
  
-When declare a const object it must be initialized.  
-When there are some constant members in class, any non-constant member function of the class can not call the constant member variable. Constant member variable can only be called by constant member function.  
+When declare a const object it must be initialized;  
+When there are some constant members in class, any non-constant member function of the class can not call the constant member variable. Constant member variable can only be called by constant member function;  
 For constant variables of a class, it can only be initialized in the initialization list after the constructor. For static constant int/enumeration type variables of a class, it can initialized both in the class and outside the class. But for other kinds of static constant variables can only be initialized outside the class.
 
 - ## **Volatile**
