@@ -5,9 +5,9 @@ Type qualifiers is used to refine the declaration of a variable, a function and 
 The const qualifier defines the type that is a constant whoes value can not be changed. When define a variable that is a constant it must be initialized. Because if we do not initialize it as we can not modify its value this makes the variable useless.
 In C++ there are two kinds of constant that always comfuse us: **constant pointer, pointer to constant**.
 
-`const int *ptr;
-int const *ptr;
-`
+`const int *ptr;`
+
+`int const *ptr;`
 
 The two kinds of defination declares a pointer to const int type. The content of the pointer point to can not be changed, but the pointer itself can point to other place.
 
