@@ -38,7 +38,7 @@ The constant defined here is a local constant, we can change its value through p
 struct node{
     int a;
     int b;
-    node(int v1, int v2):a(v1), b(v2){;}
+    node(int v1, int v2):a(v1), b(v2){}
 };
 
 int main(void)
@@ -58,7 +58,7 @@ int main(void)
 20 10
 20 10
 ```
-
+For struct or class, although, we define the instance is a constant, the variable members are not constant, so we can change its value through a pointer. The complier can not detect this kind of change. And do not like basic type's constant, the complier do no replace with some value, when a constant struc/class object is created, the complier will give a unused memory to it and make sure the object hasn't been assgined value directly. So the above code tells us i and p have the same value after the change.
 
 Can any constant's value can be changed through pointer? The answer is also "NO". For basic type, only local constant variable can be changed in this way. For static local constant, global constant, static global constant, these variables are stored on the read only data segment, they are real constant, the value can not be changed during its lifetime.
 
