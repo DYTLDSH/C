@@ -12,7 +12,9 @@ int const *ptr;
 
 The two kinds of defination declares a pointer to const int type. The content of the pointer point to can not be changed, but the pointer itself can point to other place.
 
-```int * const ptr;```
+```C++
+int * const ptr;
+```
 
 The two kinds of defination declares a pointer to const int type. The content of the pointer point to can not be changed, but the pointer itself can point to other place. This defines a const pointer to int type. The pointer itself is a constant which means that the pointer can not point to other location, but the content of the pointer point to can be changed.
 
