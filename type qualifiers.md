@@ -18,7 +18,7 @@ int * const ptr;
 
 The two kinds of defination declares a pointer to const int type. The content of the pointer point to can not be changed, but the pointer itself can point to other place. This defines a const pointer to int type. The pointer itself is a constant which means that the pointer can not point to other location, but the content of the pointer point to can be changed.
 
-Dose constant must can not be changed? The answer is "NO". Below is an example:
+Dose constant must can not be changed? The answer is "NO". Below gives two example:
 ``` C++
 int main(){
     const int i = 200;
@@ -33,8 +33,28 @@ int main(){
 200 100
 0x6dfee8 0x6dfee8
 ```
-The constant defined here is a local constant, we can change its value through pointer. Through the output we know that p and i are point to the same location, but why it still output different values? When const qualifier qualified the basic data type, the variable will be replaced with the value first give to it during the compliation phase. So when we output the value of i it will always gives us 200. But we changed the value in its physical memory, the output gives us the changed value 100. When we assign a to a constant, the complier will gives us en error. So for a constant we can only make sure it is a constant in the compliation phase, but at the running time, the value can be changed through pointer.  
+The constant defined here is a local constant, we can change its value through pointer. Through the output we know that p and i are point to the same location, but why it still output different values? When const qualifier qualified the basic data type, the variable will be replaced with the value first give to it during the compliation phase. So when we output the value of i it will always gives us 200. But we changed the value in its physical memory, the output gives us the changed value 100. When we assign a to a constant, the complier will gives us en error. So for a constant we can only make sure it is a constant in the compliation phase, but at the running time, the value can be changed through pointer.
+```C++
+struct node{
+    int a;
+    int b;
+    node(int v1, int v2):a(v1), b(v2){;}
+};
+
+int main(void)
+{
+    const node i(10, 20);
+    cout << i.a << " " << i.b << endl;
+    node *p = (node*)&i;
+    p->a = 20;
+    p->b = 10;
+    cout << p->a << " " << p->b;
+    return 0;
+}
+```
+
 Can any constant's value can be changed through pointer? The answer is also "NO". For basic type, only local constant variable can be changed in this way. For static local constant, global constant, static global constant, these variables are stored on the read only data segment, they are real constant, the value can not be changed during its lifetime.
+
 When declare a const object it must be initialized.  
 When there are some constant members in class, any non-constant member function of the class can not call the constant member variable. Constant member variable can only be called by constant member function.
 
