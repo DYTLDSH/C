@@ -25,12 +25,15 @@ int main(){
     int *p = (int *)&i;
     *p = 100;
     cout << i << " " << *p << endl;
+    cout << &i << " " << p;
     return 0;
 }
 ```
 ```C++
 200 100
+0x6dfee8 0x6dfee8
 ```
+The constant defined here is a local constant, we can change it value through pointer. Through the output we know that p and i are point to the same location, but why it still output different values? When const qualifier qualified the basic data type, the variable will be replaced with the value first give to it during the compliation phase. So when we output the value of i it will always gives us 200. But we changed the value in its physical memory, the output gives us the changed value 100. 
 When declare a const object it must be initialized.  
 When there are some constant members in class, any non-constant member function of the class can not call the constant member variable. Constant member variable can only be called by constant member function.
 
