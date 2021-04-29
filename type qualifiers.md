@@ -14,7 +14,8 @@ The two kinds of defination declares a pointer to const int type. The content of
 
 The two kinds of defination declares a pointer to const int type. The content of the pointer point to can not be changed, but the pointer itself can point to other place. This defines a const pointer to int type. The pointer itself is a constant which means that the pointer can not point to other location, but the content of the pointer point to can be changed.
 
-```const int i = 200;
+``` C++
+const int i = 200;
     int *p = (int *)&i;
     *p = 100;
     cout << i << endl << *p << endl;
