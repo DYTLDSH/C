@@ -48,10 +48,17 @@ int main(void)
     node *p = (node*)&i;
     p->a = 20;
     p->b = 10;
+    cout << i.a << " " << i.b << endl;
     cout << p->a << " " << p->b;
     return 0;
 }
 ```
+```C++
+10 20
+20 10
+20 10
+```
+
 
 Can any constant's value can be changed through pointer? The answer is also "NO". For basic type, only local constant variable can be changed in this way. For static local constant, global constant, static global constant, these variables are stored on the read only data segment, they are real constant, the value can not be changed during its lifetime.
 
