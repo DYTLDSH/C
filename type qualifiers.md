@@ -18,16 +18,19 @@ int * const ptr;
 
 The two kinds of defination declares a pointer to const int type. The content of the pointer point to can not be changed, but the pointer itself can point to other place. This defines a const pointer to int type. The pointer itself is a constant which means that the pointer can not point to other location, but the content of the pointer point to can be changed.
 
+Dose constant must can not be changed? The answer is "NO". Below is an example:
 ``` C++
 int main(){
     const int i = 200;
     int *p = (int *)&i;
     *p = 100;
-    cout << i << endl << *p << endl;
+    cout << i << " " << *p << endl;
     return 0;
 }
 ```
-
+```C++
+200 100
+```
 When declare a const object it must be initialized.  
 When there are some constant members in class, any non-constant member function of the class can not call the constant member variable. Constant member variable can only be called by constant member function.
 
