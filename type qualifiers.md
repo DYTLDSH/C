@@ -121,4 +121,5 @@ Jack
 18721817629
 Shanghai
 ```
-Jack is a constant instance of the Student class, its data member phone and address are mutable, the value can be changed through both const function and assign value directly.
+Jack is a constant instance of the Student class, its data member phone and address are mutable, the value can be changed through both const function and assign value directly. 
+For a class or struct, most of its members should be constant but few need to change, in this scenario, define this kind of member as mutable will be very convenient and safe.
