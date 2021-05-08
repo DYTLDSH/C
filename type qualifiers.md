@@ -106,7 +106,7 @@ int main(){
     const Student Jack(1232, "Jack", "18921783456", "SJTU");
     Jack.display();
     Jack.changePhone("18721817629");
-    Jack.changeAddr("Shanghai");
+    Jack.address = "Shanghai";
     Jack.display();
     return 0;
 }
@@ -121,3 +121,4 @@ Jack
 18721817629
 Shanghai
 ```
+Jack is a constant instance of the Student class, its data member phone and address are mutable, the value can be changed through both const function and assign value directly.
