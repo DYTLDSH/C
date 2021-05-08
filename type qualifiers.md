@@ -69,4 +69,45 @@ For constant variables of a class, it can only be initialized in the initializat
 - ## **Volatile**
 
 - ## **Mutable**
-Mutable can only be used in **class/struct**. We can qualify a data member of a class or struct as mutable type. A mutable data member of a constant class/struct object can be modified. We can change mutable members' value in const member function and assign value to it directly. Let me give a scenario to explain the reason why we want to change the data members' value of a constant class/struct object.
+Mutable can only be used in **class** or **struct**. We can qualify a data member of a class or struct as mutable type. A mutable data member of a constant class/struct object can be modified. We can change mutable members' value in const member function and assign value to it directly. Let me give a scenario to explain the reason why we want to change the data members' value of a constant class/struct object.  
+For every student, the school will keep students' personal information. After that, the sheet of the personal information should be kept unchanged. But what if some students have their phone number changed or address changed and so on, they need to changed their personal sheet. The following code gives the details:
+```C++
+#include<iostream>
+
+using namespace std;
+
+class Student{
+public:
+    int ID;
+    string name;
+    mutable string phone;
+    mutable string address;
+    Student(int id, string name_, string number, string addr){
+        ID = id;
+        name = name_;
+        phone = number;
+        address = addr;
+    }
+    void changePhone(string newPhone) const{
+        phone = newPhone;
+    }
+    void changeAddr(string newAddr) const{
+        address = newAddr;
+    }
+    void display() const{
+        cout << ID << endl;
+        cout << name << endl;
+        cout << phone << endl;
+        cout << address << endl;
+    }
+};
+
+int main(){
+    const Student Jack(1232, "Jack", "18921783456", "SJTU");
+    Jack.display();
+    Jack.changePhone("18721817629");
+    Jack.changeAddr("Shanghai");
+    Jack.display();
+    return 0;
+}
+```
