@@ -111,3 +111,13 @@ int main(){
     return 0;
 }
 ```
+```C++
+1232
+Jack
+18921783456
+SJTU
+1232
+Jack
+18721817629
+Shanghai
+```
