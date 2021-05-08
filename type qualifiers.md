@@ -69,3 +69,4 @@ For constant variables of a class, it can only be initialized in the initializat
 - ## **Volatile**
 
 - ## **Mutable**
+Mutable can only be used in **class/struct**. We can qualify a data member of a class or struct as mutable type. A mutable data member of a constant class/struct object can be modified. We can change mutable members' value in const member function and assign value to it directly. Let me give a scenario to explain the reason why we want to change the data members' value of a constant class/struct object.
