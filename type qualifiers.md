@@ -33,7 +33,7 @@ int main(){
 200 100
 0x6dfee8 0x6dfee8
 ```
-The constant defined here is a local constant, we can change its value through pointer. Through the output we know that p and i are point to the same location, but why it still output different values? When const qualifier qualified the basic data type, the variable will be replaced with the value first give to it during the compliation phase. So when we output the value of i it will always gives us 200. But we changed the value in its physical memory, the output gives us the changed value 100. When we assign a to a constant, the complier will gives us en error. So for a constant we can only make sure it is a constant in the compliation phase, but at the running time, the value can be changed through pointer.
+The constant defined here is a local constant, we can change its value through pointer. Through the output we know that p and i are point to the same location, but why it still output different values? When const qualifier qualified the basic data type, the variable will be replaced with the value first give to it during the compliation phase. So when we output the value of i it will always gives us 200. But we changed the value in its physical memory, the output gives us the changed value 100. When we assign value to a constant, the complier will gives us an error. So for a constant we can only make sure it is a constant in the compliation phase, but at the running time, the value can be changed through pointer.
 ```C++
 struct node{
     int a;
