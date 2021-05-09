@@ -67,6 +67,10 @@ When there are some constant members in class, any non-constant member function 
 For constant variables of a class, it can only be initialized in the initialization list after the constructor. For static constant int/enumeration type variables of a class, it can initialized both in the class and outside the class. But for other kinds of static constant variables can only be initialized outside the class.
 
 - ## **Volatile**
+The volatile keyword in C++/C is used to tell the compiler that the value of the variable is unstable may change any time, so the complier should not optimize the variable during the compilation phase and each time should read from memory directly. In order to avoid get unexpected result, for the variables may change for some unknown reason during the running time, we should add the keyword volatile to the variable. Below gives some general cases of using volatile:  
+1. In multithread environment, volatile can be used as a way of synchronization. As there are several tasks running at the same time, the value of the variable might be changed by some other thread, to make the change visible for others, we need to set the variable volatile, making that each time read the value from memory directly.  
+2. Add volatile to the variable modified in the interrupt service procedure, making other procedures can detect such a change.  
+3. The hardware register of memory map is usually indicated by volatile, as each read and write of it may have different meanings.
 
 - ## **Mutable**
 Mutable can only be used in **class** or **struct**. We can qualify a data member of a class or struct as mutable type. A mutable data member of a constant class/struct object can be modified. We can change mutable members' value in const member function and assign value to it directly. Let me give a scenario to explain the reason why we want to change the data members' value of a constant class/struct object.  
