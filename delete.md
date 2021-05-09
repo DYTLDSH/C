@@ -16,4 +16,5 @@ int main()
     return 0;
 }
 ```
-For the above code, the result may different, that will depend on the current situation of the computer. As a has been deleted before allocate memory for b, the system have a chance to allocate the same address to b, then the running result is uncontrol. If a and b point to the same place, them the output is 10 and 20, if not, the output will be 10 and 10.
+For the above code, the result may different, that will depend on the current situation of the computer. As a has been deleted before allocate memory for b, the system have a chance to allocate the same address to b, then the running result is uncontrol. If a and b point to the same place, them the output is 10 and 20, if not, the output will be 10 and 10.  
+If the object being deleted is an class object, its destructor will be called. Then what going on will depend on the destructor function.
