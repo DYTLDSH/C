@@ -76,6 +76,16 @@ const auto&& c = 20; // universal reference.
 const auto&& d = b; // error
 ```
 - #### **typedef declarations**
+```C++
+class A{
+    // do something here ...
+}
+A a;
+typedef A&& myType;
+myType& b = a; // reference collapsing, b's type is A&.
+const myType& c = move(a);  // c's type is const A&.
+myType&& d = move(a); // the type of d is A&&.
+```
 - #### **decltype expression**
 For decltype it's different from auto.
 ```C++
