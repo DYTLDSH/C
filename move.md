@@ -1,6 +1,6 @@
 # Introduction
 - ## **Key words**
-lvalue, rvalue, lvalue reference, rvalue reference, universal reference, reference collapsing
+lvalue, rvalue, lvalue reference, rvalue reference, universal reference, reference collapsing.
 - ## **lvalue**
 For an lvalue is something that has a specific memory location, we can get the address of it. Lvalue must have an container.
 - ## **rvalue**
@@ -67,6 +67,15 @@ void func(std::vector<T>&& p);
 // rvalue reference, here exist type deduction of T, but it's the type of vector, but not the T of T&&.
 ```
 - #### **auto declarations**
+```C++
+auto&& a = 10; // universal reference. 
+int x = 20;
+auto&& b = x; // universal reference.
+const auto&& c = 20; // universal reference.
+const auto&& d = b; // error
+```
 - #### **typedef declarations**
 - #### **decltype expression**
+- ## **Reference collapsing rules**
+
 - ## **move**
