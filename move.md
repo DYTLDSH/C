@@ -42,6 +42,29 @@ There are four types of contexts that might exist universal reference:
 3. typedef declarations;
 4. decltype expression;
 - #### **Function template parameters**
+```C++
+template<typename T>
+void func1(T&& param); //universal reference.
+//---------------------------------------------------------------------------
+template<typename T>
+void func1(const T&& param); // rvalue reference, deduced parameter type is const T&&.
+//--------------------------------------------------------
+template<typename T>
+class A{
+public:
+    void func(T&& param){}  // rvalue reference, as the type T already known.
+}
+//----------------------------------------------------------------------------
+template<typename T>
+class A{
+public:
+    template<typename S>
+    void func(S&& param){}  // universal reference.
+}
+//----------------------------------------------------------------------------
+template<typename T>
+void func(std::vector<T>&& p); // rvalue reference, here exist type deduction of T, but it's the type of vector, but not the T of T&&.
+```
 - #### **auto declarations**
 - #### **typedef declarations**
 - #### **decltype expression**
