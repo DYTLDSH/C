@@ -98,7 +98,7 @@ The reference collapsing rules make universal reference work. We can not declare
 ![image](https://github.com/DYTLDSH/C/blob/main/figs/reference_collapse_rules.png)
 - ## **move**
 What is move? How to use it?  
-std::move is just a function of C++, move doesn't move. std::move doesn't move anything, one thing it do is that when you pass in a variable into it, it will return back an rvalue no matter what you pass in. The principle of sht::move is as follows:
+std::move is just a function of C++, **move doesn't move and move unconditionally cast to an rvalue**. std::move doesn't move anything, one thing it do is that when you pass in a variable into it, it will return back an rvalue no matter what you pass in. The principle of sht::move is as follows:
 ```C++
 template<typename T>  
 inline typename std::remove_reference<T>::type&& move(T&& t){ 
@@ -121,4 +121,38 @@ struct remove_reference<T&&>{ // rvalue reference
    typedef T type;
 }
 ```
-With the reference collapsing rules, the std::move function can pass in both lvalues and rvalues, eventually, it will return an rvalue.
+First a value t is passed in, after the automatic type deduction, get the type of T. Then pass the T into remove_reference, remove the reference of T, get the type. Conbine "type" and "&&" to rvalue type&&. The last step is to use to static_cast cast t to type&&, return back. With the reference collapsing rules, the std::move function can pass in both lvalues and rvalues, eventually, it will return an rvalue.  
+When I'm studying std::move semantics, an important thing I'm care about is that how to use it, and where to use it. See the example below:
+```C++
+#include<iostream>
+#include<vector>
+using namespace std;
+
+class A {
+public:
+	vector<int> val;
+	A() {
+		cout << "Default Constructing..." << endl;
+	}
+	A(vector<int> v) {
+		val.resize(v.size(), 1);
+		for (int i = 0; i < v.size(); ++i) {
+			val[i] = v[i];
+		}
+		cout << "Given Value Constructing..." << endl;
+	}
+	A(A& a) {
+		val.resize(a.val.size(), 1);
+		for (int i = 0; i < a.val.size(); ++i) {
+			val[i] = a.val[i];
+		}
+		cout << "Copy Constructing..." << endl;
+	}
+};
+int main() {
+	vector<int> v(10);
+	A a(v);
+	A b(a);
+	return 0;
+}  
+```
