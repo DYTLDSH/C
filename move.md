@@ -73,7 +73,7 @@ auto&& a = 10; // universal reference.
 int x = 20;
 auto&& b = x; // universal reference.
 const auto&& c = 20; // universal reference.
-const auto&& d = b; // error
+const auto&& d = b; // error, as d is const int && but b is int &. Can not bind an lvalue to rvalue.
 ```
 - #### **typedef declarations**
 ```C++
