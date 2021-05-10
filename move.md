@@ -42,4 +42,7 @@ There are four types of contexts that might exist universal reference:
 3. typedef declarations;
 4. decltype expression;
 - #### **Function template parameters**
+- #### **auto declarations**
+- #### **typedef declarations**
+- #### **decltype expression**
 - ## **move**
