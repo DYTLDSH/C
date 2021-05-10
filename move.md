@@ -257,3 +257,10 @@ void func2(T&& param) {
 	func1(std::forward<T>(param));
 }
 ```
+Then the output becomes:
+```C++
+Default Constructing...
+In func2
+Move Constructing...
+In func1
+```
