@@ -63,7 +63,8 @@ public:
 }
 //----------------------------------------------------------------------------
 template<typename T>
-void func(std::vector<T>&& p); // rvalue reference, here exist type deduction of T, but it's the type of vector, but not the T of T&&.
+void func(std::vector<T>&& p); 
+// rvalue reference, here exist type deduction of T, but it's the type of vector, but not the T of T&&.
 ```
 - #### **auto declarations**
 - #### **typedef declarations**
