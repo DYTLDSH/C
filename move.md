@@ -123,6 +123,7 @@ struct remove_reference<T&&>{ // rvalue reference
 ```
 First a value t is passed in, after the automatic type deduction, get the type of T. Then pass the T into remove_reference, remove the reference of T, get the type. Conbine "type" and "&&" to rvalue type&&. The last step is to use to static_cast cast t to type&&, return back. With the reference collapsing rules, the std::move function can pass in both lvalues and rvalues, eventually, it will return an rvalue.  
 When I'm studying std::move semantics, an important thing I'm care about is that how to use it, and where to use it. See the example below:
+- #### **move constructor and move assignment**
 ```C++
 #include<iostream>
 #include<vector>
@@ -169,5 +170,26 @@ A& operator=(A&& a){
 	val = a.val;  // move assignment
 }
 ```
-For a class, if we have write the move constructor function, when using an rvalue to construct an object, it will call the move constructor function. And if we have write the move assignment function, when assign an rvalue to an object, it will call the move assignment function. But if the rvalue has been state as a constant, then the move constructor function will not be called, it will fall back to the copy constructor. So **if want to move, don't define it as const**. One thing to take care of, make sure the moved object is an rvalue, if it don't, make sure it won't be used in the later time. Once the object has been moved, to set the object to NULL or nullptr for safe.  
-If a class or other variables 
+For a class, if we have write the move constructor function, when using an rvalue to construct an object, it will call the move constructor function. And if we have write the move assignment function, when assign an rvalue to an object, it will call the move assignment function. For an lvalue, can first use the std::move change it to rvalue. But if the lvalue has been state as a constant, then the move constructor function will not be called, it will fall back to the copy constructor. So **if want to move, don't define it as const**. One thing to take care of, make sure the moved object is an rvalue, if it don't, make sure it won't be used in the later time. Once the object has been moved, to set the object to NULL or nullptr for safe.  
+If a class or other variables do not contain any resources, that won't be a good idea to use move.
+- #### **temp variables**
+```C++
+vector<vector<int>> nums;
+for(int i = 0; i < 10; ++i){
+	vector<int> tmp{1,2,3,4,5};
+	nums.push_back(move(tmp));
+}
+```
+```C++
+string a = "Hello World!";
+string b = move(a);  // make sure a do not use after move
+```
+tmp is a temp vector, we can just move it into nums. After the move operation, vector tmp will becomes to an empty vector, the size of tmp will become 0, and a will become an empty string.
+- #### **unique_ptr**
+For an unique_ptr, it exclusively control a pointer, move can help here.
+```C++
+int* p = new int(10);
+unique_ptr<int> ptr1(p);
+unique_ptr<int> ptr2(move(ptr1));
+unique_ptr<int> ptr3 = move(ptr2);
+```
