@@ -130,24 +130,24 @@ using namespace std;
 
 class A {
 public:
-	vector<int> val;
-	A() {
-		cout << "Default Constructing..." << endl;
+vector<int> val;
+A() {
+	cout << "Default Constructing..." << endl;
+}
+A(vector<int> v) {
+	val.resize(v.size(), 1);
+	for (int i = 0; i < v.size(); ++i) {
+		val[i] = v[i];
 	}
-	A(vector<int> v) {
-		val.resize(v.size(), 1);
-		for (int i = 0; i < v.size(); ++i) {
-			val[i] = v[i];
-		}
-		cout << "Given Value Constructing..." << endl;
+	cout << "Given Value Constructing..." << endl;
+}
+A(A& a) {
+	val.resize(a.val.size(), 1);
+	for (int i = 0; i < a.val.size(); ++i) {
+		val[i] = a.val[i];
 	}
-	A(A& a) {
-		val.resize(a.val.size(), 1);
-		for (int i = 0; i < a.val.size(); ++i) {
-			val[i] = a.val[i];
-		}
-		cout << "Copy Constructing..." << endl;
-	}
+	cout << "Copy Constructing..." << endl;
+}
 };
 int main() {
 	vector<int> v(10);
@@ -156,3 +156,8 @@ int main() {
 	return 0;
 }  
 ```
+```C++
+Given Value Constructing...
+Copy Constructing...
+```
+What if the a doesn't need to be used after constructing b, here we can use std::move to reduce the replication step. Letting b take control of the resources of a directly by move. There are two methods, one is **move**
