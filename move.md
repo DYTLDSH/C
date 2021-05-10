@@ -119,6 +119,6 @@ struct remove_reference<T&>{  // lvalue reference
 template <typename T>
 struct remove_reference<T&&>{ // rvalue reference
    typedef T type;
-} 
+}
 ```
 With the reference collapsing rules, the std::move function can pass in both lvalues and rvalues, eventually, it will return an rvalue.
