@@ -160,4 +160,14 @@ int main() {
 Given Value Constructing...
 Copy Constructing...
 ```
-What if the a doesn't need to be used after constructing b, here we can use std::move to reduce the replication step. Letting b take control of the resources of a directly by move. There are two methods, one is **move**
+What if the a doesn't need to be used after constructing b, here we can use std::move to reduce the replication step. Letting b take control of the resources of a directly by move. There are two methods, one is **move construtor** another is **move assignment**.
+```C++
+A(A&& a){
+	val = a.val;  // move constructor
+}
+A& operator=(A&& a){
+	val = a.val;  // move assignment
+}
+```
+For a class, if we have write the move constructor function, when using an rvalue to construct an object, it will call the move constructor function. And if we have write the move assignment function, when assign an rvalue to an object, it will call the move assignment function. But if the rvalue has been state as a constant, then the move constructor function will not be called, it will fall back to the copy constructor. So **if want to move, don't define it as const**. One thing to take care of, make sure the moved object is an rvalue, if it don't, make sure it won't be used in the later time. Once the object has been moved, to set the object to NULL or nullptr for safe.  
+If a class or other variables 
