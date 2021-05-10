@@ -73,7 +73,7 @@ auto&& a = 10; // universal reference.
 int x = 20;
 auto&& b = x; // universal reference.
 const auto&& c = 20; // universal reference.
-const auto&& d = b; // error, as d is const int && but b is int &. Can not bind an lvalue to rvalue.
+const auto&& d = b; // error, as the type of d is const int && but b is int &. Can not bind an lvalue to rvalue.
 ```
 - #### **typedef declarations**
 ```C++
@@ -97,3 +97,28 @@ decltype((v)) &&b = v; // as v has been parenthesized which indicate reference, 
 The reference collapsing rules make universal reference work. We can not declare a reference to reference, but the compiler can do it. When the compiler meet such a case like int && &&, it will run the reference collapsing rules.
 ![image](https://github.com/DYTLDSH/C/blob/main/figs/reference_collapse_rules.png)
 - ## **move**
+What is move? How to use it?  
+std::move is just a function of C++, move doesn't move. std::move doesn't move anything, one thing it do is that when you pass in a variable into it, it will return back an rvalue no matter what you pass in. The principle of sht::move is as follows:
+```C++
+template<typename T>  
+inline typename std::remove_reference<T>::type&& move(T&& t){ 
+    return static_cast<typename std::remove_reference<T>::type&&>(t); 
+}  
+```
+The function has only one line which returns a value. It cast type t to type "remove_reference<T>::type&&", then return.  
+remove_reference is a class, and the "type" is a member of class, use :: to visit it. The effect of the remove_reference is to remove the reference.
+```C++
+template <typename T>
+struct remove_reference{
+    typedef T type;  // "type" is the alias of T
+};
+template <typename T>
+struct remove_reference<T&>{  // lvalue reference
+    typedef T type;
+}
+template <typename T>
+struct remove_reference<T&&>{ // rvalue reference
+   typedef T type;
+} 
+```
+With the reference collapsing rules, the std::move function can pass in both lvalues and rvalues, eventually, it will return an rvalue.
