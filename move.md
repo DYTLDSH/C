@@ -79,4 +79,5 @@ const auto&& d = b; // error
 - #### **decltype expression**
 - ## **Reference collapsing rules**
 The reference collapsing rules make universal reference work. We can not declare a reference to reference, but the compiler can do it. When the compiler meet such a case like int && &&, it will run the reference collapsing rules.
+![image](https://github.com/DYTLDSH/C/blob/main/figs/reference_collapse_rules.png)
 - ## **move**
