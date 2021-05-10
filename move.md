@@ -34,7 +34,8 @@ It has to be initialized when creating it.
 - ## **universal reference**
 There are two necessary conditions for universal reference:
 1. T&&;
-2. Type deduction of T is must.  
+2. Type deduction of T is must.
+
 Determine whether it is universal reference, after knowing the form of the expression is 'T&&', another important thing is to make sure that the type of T hasn't known until it gets the deduction.  
 There are four types of contexts that might exist universal reference:
 1. Function template parameters;
