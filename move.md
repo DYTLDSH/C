@@ -1,6 +1,6 @@
 # Introduction
 - ## **Key words**
-lvalue, rvalue, lvalue reference, rvalue reference, universal reference, reference collapsing.
+lvalue, rvalue, lvalue reference, rvalue reference, universal reference, reference collapsing, move, forward.
 - ## **lvalue**
 For an lvalue is something that has a specific memory location, we can get the address of it. Lvalue must have an container.
 - ## **rvalue**
@@ -192,4 +192,68 @@ int* p = new int(10);
 unique_ptr<int> ptr1(p);
 unique_ptr<int> ptr2(move(ptr1));
 unique_ptr<int> ptr3 = move(ptr2);
+```
+- ## **forward**
+The biggest difference between move and forward is that, **move unconditionally cast to an rvalue, but forward conditionally cast to an rvalue**. If its an lvalue forward return an lvalue, if its an rvalue, forward return an rvalue.
+```C++
+#include<iostream>
+#include<vector>
+#include<memory>
+using namespace std;
+
+class A {
+public:
+	vector<int> val;
+	A() {
+		cout << "Default Constructing..." << endl;
+	}
+	A(vector<int> v) {
+		val.resize(v.size(), 1);
+		for (int i = 0; i < v.size(); ++i) {
+			val[i] = v[i];
+		}
+		cout << "Given Value Constructing..." << endl;
+	}
+	A(A& a) {
+		val.resize(a.val.size(), 1);
+		for (int i = 0; i < a.val.size(); ++i) {
+			val[i] = a.val[i];
+		}
+		cout << "Copy Constructing..." << endl;
+	}
+	A(A&& a) {
+		val = a.val;
+		cout << "Move Constructing..." << endl;
+	}
+};
+
+template <typename T>
+void func1(T param) {
+	cout << "In func1" << endl;
+}
+
+template <typename T>
+void func2(T&& param) {
+	cout << "In func2" << endl;
+	func1(param);
+}
+
+int main() {
+	func2(A());
+	return 0;
+}
+```
+```C++
+Default Constructing...
+In func2
+Copy Constructing...
+In func1
+```
+In the main function, we pass in an rvalue into func2, the default constructor being called, then pass the param into func1, from the output we known that it becomes to an lvalue in func1. But sometimes it is not what we want. To make it still an rvalue in func1, we have to make a little bit change in func2:
+```C++
+template <typename T>
+void func2(T&& param) {
+	cout << "In func2" << endl;
+	func1(std::forward<T>(param));
+}
 ```
