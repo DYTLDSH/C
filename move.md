@@ -77,6 +77,12 @@ const auto&& d = b; // error
 ```
 - #### **typedef declarations**
 - #### **decltype expression**
+For decltype it's different from auto.
+```C++
+int v;
+decltype(v) &&a = 10; // type of a in an rvalue, int &&.
+decltype((v)) &&b = v; // as v has been parenthesized which indicate reference, the type of b is int &.
+```
 - ## **Reference collapsing rules**
 The reference collapsing rules make universal reference work. We can not declare a reference to reference, but the compiler can do it. When the compiler meet such a case like int && &&, it will run the reference collapsing rules.
 ![image](https://github.com/DYTLDSH/C/blob/main/figs/reference_collapse_rules.png)
