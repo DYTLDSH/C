@@ -1,6 +1,6 @@
 # Introduction
 - ## **Key words**
-lvalue, rvalue, lvalue reference, rvalue reference
+lvalue, rvalue, lvalue reference, rvalue reference, universal reference, reference collapsing
 - ## **lvalue**
 For an lvalue is something that has a specific memory location, we can get the address of it. Lvalue must have an container.
 - ## **rvalue**
@@ -31,4 +31,15 @@ const int &lref = tmp;
 - ## **rvalue reference**
 rvalue reference is a reference that binds t an rvalue. It marked with symbol '&&'.
 It has to be initialized when creating it.
+- ## **universal reference**
+There are two necessary conditions for universal reference:
+1. T&&;
+2. Type deduction of T is must.
+Determine whether it is universal reference, after knowing the form of the expression is 'T&&', another important thing is to make sure that the type of T hasn't known until it gets the deduction.  
+There are four types of contexts that might exist universal reference:
+1. Function template parameters;
+2. auto declarations;
+3. typedef declarations;
+4. decltype expression;
+- ### **Function template parameters**
 - ## **move**
